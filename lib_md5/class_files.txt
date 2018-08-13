@@ -1,0 +1,268 @@
+_____________________________________________________________________
++ Program class: org/sogrey/md5/a
+  Superclass:    java/lang/Object
+  Major version: 0x33
+  Minor version: 0x0
+    = target 1.7
+  Access flags:  0x21
+    = public class org.sogrey.md5.a extends java.lang.Object
+
+Interfaces (count = 0):
+
+Constant Pool (count = 39):
+  + String [MD5]
+  + Class [java/lang/Exception]
+  + Class [java/lang/Object]
+  + Class [java/lang/String]
+  + Class [java/security/MessageDigest]
+  + Class [org/sogrey/md5/a]
+  + Methodref [java/lang/String.<init> ([C)V]
+  + Methodref [java/lang/String.getBytes ()[B]
+  + Methodref [java/lang/String.toLowerCase ()Ljava/lang/String;]
+  + Methodref [java/security/MessageDigest.digest ()[B]
+  + Methodref [java/security/MessageDigest.getInstance (Ljava/lang/String;)Ljava/security/MessageDigest;]
+  + Methodref [java/security/MessageDigest.update ([B)V]
+  + NameAndType [<init> ([C)V]
+  + NameAndType [digest ()[B]
+  + NameAndType [getBytes ()[B]
+  + NameAndType [getInstance (Ljava/lang/String;)Ljava/security/MessageDigest;]
+  + NameAndType [toLowerCase ()Ljava/lang/String;]
+  + NameAndType [update ([B)V]
+  + Utf8 [()Ljava/lang/String;]
+  + Utf8 [()[B]
+  + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
+  + Utf8 [(Ljava/lang/String;)Ljava/security/MessageDigest;]
+  + Utf8 [([B)V]
+  + Utf8 [([C)V]
+  + Utf8 [<init>]
+  + Utf8 [Code]
+  + Utf8 [MD5]
+  + Utf8 [a]
+  + Utf8 [digest]
+  + Utf8 [getBytes]
+  + Utf8 [getInstance]
+  + Utf8 [java/lang/Exception]
+  + Utf8 [java/lang/Object]
+  + Utf8 [java/lang/String]
+  + Utf8 [java/security/MessageDigest]
+  + Utf8 [org/sogrey/md5/a]
+  + Utf8 [toLowerCase]
+  + Utf8 [update]
+
+Fields (count = 0):
+
+Methods (count = 1):
+  + Method:       a(Ljava/lang/String;)Ljava/lang/String;
+    Access flags: 0x19
+      = public static final java.lang.String a(java.lang.String)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 213, locals = 12, stack = 5):
+      [0] bipush 16
+      [2] newarray 5
+      [4] dup
+      [5] iconst_0
+      [6] bipush 48
+      [8] castore
+      [9] dup
+      [10] iconst_1
+      [11] bipush 49
+      [13] castore
+      [14] dup
+      [15] iconst_2
+      [16] bipush 50
+      [18] castore
+      [19] dup
+      [20] iconst_3
+      [21] bipush 51
+      [23] castore
+      [24] dup
+      [25] iconst_4
+      [26] bipush 52
+      [28] castore
+      [29] dup
+      [30] iconst_5
+      [31] bipush 53
+      [33] castore
+      [34] dup
+      [35] bipush 6
+      [37] bipush 54
+      [39] castore
+      [40] dup
+      [41] bipush 7
+      [43] bipush 55
+      [45] castore
+      [46] dup
+      [47] bipush 8
+      [49] bipush 56
+      [51] castore
+      [52] dup
+      [53] bipush 9
+      [55] bipush 57
+      [57] castore
+      [58] dup
+      [59] bipush 10
+      [61] bipush 65
+      [63] castore
+      [64] dup
+      [65] bipush 11
+      [67] bipush 66
+      [69] castore
+      [70] dup
+      [71] bipush 12
+      [73] bipush 67
+      [75] castore
+      [76] dup
+      [77] bipush 13
+      [79] bipush 68
+      [81] castore
+      [82] dup
+      [83] bipush 14
+      [85] bipush 69
+      [87] castore
+      [88] dup
+      [89] bipush 15
+      [91] bipush 70
+      [93] castore
+      [94] astore_1 v1
+      [95] aload_0 v0
+      [96] invokevirtual #8
+        + Methodref [java/lang/String.getBytes ()[B]
+      [99] astore_2 v2
+      [100] ldc #1
+        + String [MD5]
+      [102] invokestatic #11
+        + Methodref [java/security/MessageDigest.getInstance (Ljava/lang/String;)Ljava/security/MessageDigest;]
+      [105] astore_3 v3
+      [106] aload_3 v3
+      [107] aload_2 v2
+      [108] invokevirtual #12
+        + Methodref [java/security/MessageDigest.update ([B)V]
+      [111] aload_3 v3
+      [112] invokevirtual #10
+        + Methodref [java/security/MessageDigest.digest ()[B]
+      [115] astore v4
+      [117] aload v4
+      [119] arraylength
+      [120] istore v5
+      [122] iload v5
+      [124] iconst_2
+      [125] imul
+      [126] newarray 5
+      [128] astore v6
+      [130] iconst_0
+      [131] istore v7
+      [133] aload v4
+      [135] astore v8
+      [137] aload v8
+      [139] arraylength
+      [140] istore v9
+      [142] iconst_0
+      [143] istore v10
+      [145] iload v10
+      [147] iload v9
+      [149] ificmpge +48 (target=197)
+      [152] aload v8
+      [154] iload v10
+      [156] baload
+      [157] istore v11
+      [159] aload v6
+      [161] iload v7
+      [163] iinc v7, 1
+      [166] aload_1 v1
+      [167] iload v11
+      [169] iconst_4
+      [170] iushr
+      [171] bipush 15
+      [173] iand
+      [174] caload
+      [175] castore
+      [176] aload v6
+      [178] iload v7
+      [180] iinc v7, 1
+      [183] aload_1 v1
+      [184] iload v11
+      [186] bipush 15
+      [188] iand
+      [189] caload
+      [190] castore
+      [191] iinc v10, 1
+      [194] goto -49 (target=145)
+      [197] new #4
+        + Class [java/lang/String]
+      [200] dup
+      [201] aload v6
+      [203] invokespecial #7
+        + Methodref [java/lang/String.<init> ([C)V]
+      [206] invokevirtual #9
+        + Methodref [java/lang/String.toLowerCase ()Ljava/lang/String;]
+      [209] areturn
+      [210] astore_2 v2
+      [211] aconst_null
+      [212] areturn
+      Code attribute exceptions (count = 1):
+      - ExceptionInfo (95 -> 209: 210):
+      + Class [java/lang/Exception]
+      Code attribute attributes (attribute count = 0):
+
+Class file attributes (count = 0):
+
+_____________________________________________________________________
++ Program class: org/sogrey/md5/impl/Md5Utils
+  Superclass:    java/lang/Object
+  Major version: 0x33
+  Minor version: 0x0
+    = target 1.7
+  Access flags:  0x21
+    = public class org.sogrey.md5.impl.Md5Utils extends java.lang.Object
+
+Interfaces (count = 1):
+  + Class [org/sogrey/jarinterface/Md5JarInterface]
+
+Constant Pool (count = 19):
+  + Class [java/lang/Object]
+  + Class [org/sogrey/jarinterface/Md5JarInterface]
+  + Class [org/sogrey/md5/a]
+  + Class [org/sogrey/md5/impl/Md5Utils]
+  + Methodref [java/lang/Object.<init> ()V]
+  + Methodref [org/sogrey/md5/a.a (Ljava/lang/String;)Ljava/lang/String;]
+  + NameAndType [<init> ()V]
+  + NameAndType [a (Ljava/lang/String;)Ljava/lang/String;]
+  + Utf8 [()V]
+  + Utf8 [(Ljava/lang/String;)Ljava/lang/String;]
+  + Utf8 [<init>]
+  + Utf8 [Code]
+  + Utf8 [a]
+  + Utf8 [getMd5]
+  + Utf8 [java/lang/Object]
+  + Utf8 [org/sogrey/jarinterface/Md5JarInterface]
+  + Utf8 [org/sogrey/md5/a]
+  + Utf8 [org/sogrey/md5/impl/Md5Utils]
+
+Fields (count = 0):
+
+Methods (count = 2):
+  - Method:       <init>()V
+    Access flags: 0x1
+      = public Md5Utils()
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 5, locals = 1, stack = 1):
+      [0] aload_0 v0
+      [1] invokespecial #5
+        + Methodref [java/lang/Object.<init> ()V]
+      [4] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+  + Method:       getMd5(Ljava/lang/String;)Ljava/lang/String;
+    Access flags: 0x1
+      = public java.lang.String getMd5(java.lang.String)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 5, locals = 2, stack = 1):
+      [0] aload_1 v1
+      [1] invokestatic #6
+        + Methodref [org/sogrey/md5/a.a (Ljava/lang/String;)Ljava/lang/String;]
+      [4] areturn
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
+
+Class file attributes (count = 0):
+

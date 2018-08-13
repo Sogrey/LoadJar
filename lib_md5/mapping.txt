@@ -1,0 +1,5 @@
+org.sogrey.md5.a -> org.sogrey.md5.a:
+    java.lang.String a(java.lang.String) -> a
+org.sogrey.md5.impl.Md5Utils -> org.sogrey.md5.impl.Md5Utils:
+    void <init>() -> <init>
+    java.lang.String getMd5(java.lang.String) -> getMd5

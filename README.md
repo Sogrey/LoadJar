@@ -1,3 +1,12 @@
+---
+title: Android 动态调用外部jar/dex
+date: 2018-07-25 20:42:54
+tags: [Android,jar,dex]
+categories: Android
+comments: true
+toc: true
+---
+
 # Android 动态调用外部jar/dex
 
 ## 需求分析
@@ -7,7 +16,9 @@
 ## 创建项目
 
 跟往常一样，创建android studio 项目，其中包含两个app Module和两个library Module，目前都是空项目。如下图：
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813151634.jpg?raw=true)
+
 其中：
 
 - `app`:发布App，需要验证的App项目。
@@ -18,7 +29,9 @@
 ## 创建接口类
 
 首先处理`lib_interface`,在`lib_interface`中新建一个`interface`接口类[Md5JarInterface.java](https://github.com/Sogrey/LoadJar/blob/master/lib_interface/src/main/java/org/sogrey/jarinterface/Md5JarInterface.java)
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152011.jpg?raw=true)
+
 里面只有一个方法:
 ``` java
     /**
@@ -28,21 +41,30 @@
      */
     String getMd5(String content);
 ```
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152128.jpg?raw=true)
+
 
 ## 实现接口类方法
 
 要实现上面接口类方法，转到`lib_md5` module,首先需要先依赖`lib_interface`:
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152251.jpg?raw=true)
+
 在`lib_md5`的[build.gradle](https://github.com/Sogrey/LoadJar/blob/master/lib_md5/build.gradle)多了句：
 ```
     implementation project(':lib_interface')
 ```
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152320.jpg?raw=true)
 
+
 依赖好之后，在`lib_md5`新建一个[Md5Utils.java](https://github.com/Sogrey/LoadJar/blob/master/lib_md5/src/main/java/org/sogrey/md5/impl/Md5Utils.java)实现[Md5JarInterface](https://github.com/Sogrey/LoadJar/blob/master/lib_interface/src/main/java/org/sogrey/jarinterface/Md5JarInterface.java)接口:
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152416.jpg?raw=true)
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152504.jpg?raw=true)
+
 
 下面引进[MD5.java](https://github.com/Sogrey/LoadJar/blob/master/lib_md5/src/main/java/org/sogrey/md5/MD5.java)(md5算法网上多得是)，并实现`getMd5()`方法：
 ``` java
@@ -56,18 +78,24 @@
 ## 依赖测试
 
 完成了库项目功能开发，先直接依赖测试下结果。让`app2` module依赖于`lib_interface`和`lib_md5`：
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152617.jpg?raw=true)
 
 简单修改[activity_main.xml](https://github.com/Sogrey/LoadJar/blob/master/app2/src/main/res/layout/activity_main.xml):
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813152751.jpg?raw=true)
+
 在[MainActivity.java](https://github.com/Sogrey/LoadJar/blob/master/app2/src/main/java/org/sogrey/app2/MainActivity.java)添加下面代码：
 ``` java
         TextView txtResult = findViewById(R.id.txt_result);
         txtResult.setText(new Md5Utils().getMd5("123456"));
 ```
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813153202.jpg?raw=true)
+
 编译运行测试：
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813153401.jpg?raw=true)
+
 测试正常。
 
 ## 混淆打包jar
@@ -89,7 +117,9 @@
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813153930.jpg?raw=true)
 
 编辑`lib_md5`的[build.gradle](https://github.com/Sogrey/LoadJar/blob/master/lib_md5/build.gradle),修改buildTypes.release.minifyEnabled 为 true.
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813155019.jpg?raw=true)
+
 
 添加task：
 ```
@@ -110,7 +140,9 @@ task makeJar(type: Jar) {
 
 makeJar.dependsOn(deleteBuild, build)
 ```
+
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813154519.jpg?raw=true)
+
 `makeJar` task作用是打包生成jar，但是生成的jar是没有混淆的，再添加task:
 ```
 task proguardJar(dependsOn: ['makeJar'], type: proguard.gradle.ProGuardTask) {
@@ -145,8 +177,10 @@ task proguardJar(dependsOn: ['makeJar'], type: proguard.gradle.ProGuardTask) {
 }
 ```
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813155807.jpg?raw=true)
+
 `proguardJar` task 用于混淆打包。可以看到`proguardJar`里调用了`makeJar`
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813155854.jpg?raw=true)
+
 执行task,点击android studio 右上角`Gradle`展开找到`:lib_md5`,在`task`>`other`里找到我们刚定义的task：`makeJar`和`proguardJar`，直接双击执行，我们需要混淆的直接双击`proguardJar` task,等待编译完成，会在`build`里生成了两个jar包：`MD5_V1.0.jar`和`proguard-MD5_V1.0.jar`，从文件名就能看出`proguard-MD5_V1.0.jar`是混淆过的。
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813155922.jpg?raw=true)
 
@@ -156,14 +190,18 @@ task proguardJar(dependsOn: ['makeJar'], type: proguard.gradle.ProGuardTask) {
 ## jar包dx处理
 jar包生成好之后，下面就要进行dx处理，把生成的jar拷贝到Android SDK目录下`build-tools\28.0.1`，后面的版本根据你自己的版本：
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813160050.jpg?raw=true)
+
 执行下面命令：
 > dx --dex --output=proguard-MD5-dex_V1.0.jar proguard-MD5_V1.0.jar
 
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813160501.jpg?raw=true)
+
 将会生成目标jar包：`proguard-MD5-dex_V1.0.jar`
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813160542.jpg?raw=true)
+
 同样我们zip解压后看到的是一个dex文件。
 ![](https://github.com/Sogrey/LoadJar/blob/master/screenShot/TIM-20180813160636.jpg?raw=true)
+
 
 ## 引入外部jar测试
 

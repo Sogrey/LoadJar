@@ -9,6 +9,8 @@ toc: true
 
 # Android 动态调用外部jar/dex
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/00f8230c8beb4f5cb7f7e600a8084760)](https://www.codacy.com/app/Sogrey/LoadJar?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Sogrey/LoadJar&amp;utm_campaign=Badge_Grade)
+
 ## 需求分析
 
 现有需求，需要做一个生成外部jar，去验证已发布App有效性，这个外部jar可更新，而App不用重新发布之需要重新发布这个jar包即可。此次记录这种需求开发，jar包中以MD5加密为例。
